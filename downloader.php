@@ -16,6 +16,9 @@ class Downloader
 
 	public static function download($url, $fileName, $date)
 	{
+		if (!is_dir('./videos')) {
+			mkdir('./videos');
+		}
 
 		$filePath = './videos/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
 		if (file_exists($filePath)){
