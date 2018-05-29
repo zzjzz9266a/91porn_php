@@ -1,0 +1,129 @@
+[
+    {
+        "name": "appzz/cli-progressbar",
+        "version": "1.0.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/a-pp-zz/cli-progressbar.git",
+            "reference": "9563a7dc8d16e6000aa3e6ab2f909876087c98bc"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/a-pp-zz/cli-progressbar/zipball/9563a7dc8d16e6000aa3e6ab2f909876087c98bc",
+            "reference": "9563a7dc8d16e6000aa3e6ab2f909876087c98bc",
+            "shasum": ""
+        },
+        "require": {
+            "dariuszp/cli-progress-bar": "1.*",
+            "php": ">5.3.3"
+        },
+        "time": "2017-08-19T22:53:45+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "AppZz\\CLI\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "CoolSwitcher",
+                "email": "ds@appzz.pw",
+                "role": "lead"
+            }
+        ],
+        "description": "CLI progressbar",
+        "homepage": "https://github.com/a-pp-zz/cli-progressbar",
+        "keywords": [
+            "cli progressbar"
+        ]
+    },
+    {
+        "name": "dariuszp/cli-progress-bar",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/dariuszp/cli-progress-bar.git",
+            "reference": "54020a8fc60bf19579bfe0317f17a2848d48991d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/dariuszp/cli-progress-bar/zipball/54020a8fc60bf19579bfe0317f17a2848d48991d",
+            "reference": "54020a8fc60bf19579bfe0317f17a2848d48991d",
+            "shasum": ""
+        },
+        "time": "2015-11-02T14:38:59+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Dariuszp\\": "src/Dariuszp"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Dariusz Półtorak",
+                "email": "poltorak.dariusz@gmail.com"
+            }
+        ],
+        "description": "Cli progress bar"
+    },
+    {
+        "name": "imangazaliev/didom",
+        "version": "1.13",
+        "version_normalized": "1.13.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Imangazaliev/DiDOM.git",
+            "reference": "10c4033d56e599f09183959ed90bf17519b9e38b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Imangazaliev/DiDOM/zipball/10c4033d56e599f09183959ed90bf17519b9e38b",
+            "reference": "10c4033d56e599f09183959ed90bf17519b9e38b",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.4"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8"
+        },
+        "time": "2017-12-08T15:20:07+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "DiDom\\": "src/DiDom/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Imangazaliev Muhammad",
+                "email": "imangazalievm@gmail.com"
+            }
+        ],
+        "description": "Simple and fast HTML parser",
+        "homepage": "https://github.com/Imangazaliev/DiDOM",
+        "keywords": [
+            "didom",
+            "html",
+            "parser",
+            "xml"
+        ]
+    }
+]

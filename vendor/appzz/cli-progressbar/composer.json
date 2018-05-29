@@ -1,0 +1,24 @@
+{
+    "name": "appzz/cli-progressbar",
+    "description": "CLI progressbar",
+    "type": "library",
+    "keywords": [
+        "cli progressbar"
+    ],
+    "homepage": "https://github.com/a-pp-zz/cli-progressbar",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "CoolSwitcher",
+            "email": "ds@appzz.pw",
+            "role": "lead"
+        }
+    ],
+    "require": {
+        "php": ">5.3.3",
+        "dariuszp/cli-progress-bar": "1.*"
+    },
+    "autoload": {
+        "psr-4": {"AppZz\\CLI\\": "src/"}
+    }
+}
