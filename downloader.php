@@ -16,6 +16,7 @@ class Downloader
 
 	public static function download($url, $fileName, $date)
 	{
+		preg_replace('# #','',$fileName);
 		if (!is_dir('./videos')) {
 			mkdir('./videos');
 		}
