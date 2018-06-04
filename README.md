@@ -3,7 +3,8 @@
 
 #### 2018.6.4更新：
 
-由于91porn容易被墙，所以建议用境外的vps先下载，然后再从vps下载到本地。
+由于91porn容易被墙，所以建议用境外的vps先下载，然后再从vps下载到本地；
+
 由index.php提供接口，只需要把vps上的http server指到该目录下即可，然后在本地用client_downloader.php下载
 
 ----
