@@ -1,18 +1,9 @@
 <?php 
 
-use Dariuszp\CliProgressBar;
 class Downloader
 {
-	protected $bar;
-	// 是否下载完成
-	protected $downloaded = false;
-	public function __construct()
-	{
-		// 初始化一个进度条
-		$this->bar = new CliProgressBar(100);
-		$this->bar->display();
-		$this->bar->setColorToRed();
-	}
+	static $lastDownloaded = 0;
+	static $lastTime = null;
 
 	public static function download($url, $fileName, $date)
 	{
@@ -23,7 +14,7 @@ class Downloader
 
 		$filePath = './videos/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
 		if (file_exists($filePath)){
-			echo "文件已存在"."\n";
+			echo "\033[0;32m"."文件已存在"."\033[0m\n";
 			return;
 		}
 
@@ -34,7 +25,7 @@ class Downloader
 		$ch = curl_init();
 		// 从配置文件中获取根路径
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, false);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		// 开启进度条
 		curl_setopt($ch, CURLOPT_NOPROGRESS, false);
@@ -43,59 +34,56 @@ class Downloader
 		// ps: 如果目标网页跳转，也跟着跳转
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
-		$fp = fopen($filePath, 'w');
-		curl_setopt($ch, CURLOPT_FILE, $fp);
-
-		// if (false === ($stream = curl_exec($ch))) {
-		// 	throw new \Exception(curl_errno($ch));
-		// }
-		$stream = curl_exec($ch);
+		$data = curl_exec($ch);
 		curl_close($ch);
-		return $stream;
+
+		$file = fopen($filePath,"w+");
+		fputs($file,$data);//写入文件
+		fclose($file);
+		unset($data);
 	}
 
 	/**
 	* 进度条下载.
 	*
 	* @param $ch
-	* @param $countDownloadSize 总下载量
-	* @param $currentDownloadSize 当前下载量
-	* @param $countUploadSize 
-	* @param $currentUploadSize
+	* @param $downloadSize 总下载量
+	* @param $downloaded 当前下载量
+	* @param $uploadSize 
+	* @param $uploaded
 	*/
-	public function progress($ch, $countDownloadSize, $currentDownloadSize, $countUploadSize, $currentUploadSize)
-	{
-		// 等于 0 的时候，应该是预读资源不等于0的时候即开始下载
-		// 这里的每一个判断都是坑，多试试就知道了
-		if (0 === $countDownloadSize) {
-		return false;
+	function progress($resource, $downloadSize = 0, $downloaded = 0, $uploadSize = 0, $uploaded = 0){
+		if ($downloadSize === 0) {
+			return;
 		}
-		// // 有时候会下载两次，第一次很小，应该是重定向下载
-		// if ($countDownloadSize > $currentDownloadSize) {
-		// 	$this->downloaded = false;
-		// // 继续显示进度条
-		// }
-		// // 已经下载完成还会再发三次请求
-		// elseif ($this->downloaded) {
-		// 	return false;
-		// }
-		// // 两边相等下载完成并不一定结束，
-		// elseif ($currentDownloadSize === $countDownloadSize) {
-		// 	return false;
-		// }
 
-		// echo "总大小".$countDownloadSize."\n";
-		// echo "已下载".$currentDownloadSize."\n";
-		// 开始计算
-		$this->bar->setSteps($countDownloadSize);
-		$this->bar->setCurrentstep($currentDownloadSize);
-		$this->bar->progress(0);
-		if ($currentDownloadSize/$countDownloadSize > 0.5){
-			$this->bar->setColorToYellow();
+		if ($downloaded == $downloadSize) {
+			printf("下载完成: %.1f%%, %.2f MB/%.2f MB\n", $downloaded/$downloadSize*100, $downloaded/1000000, $downloadSize/1000000);
+			Downloader::$lastDownloaded = 0;
+			Downloader::$lastTime = 0;
+			return;
 		}
-		if ($currentDownloadSize/$countDownloadSize == 1){
-			$this->bar->setColorToGreen();
+
+		if (microtime(true)-Downloader::$lastTime <= 1) {
+			return;
 		}
-		// echo $bar;
+
+		$speed = ($downloaded-Downloader::$lastDownloaded)/(microtime(true)-Downloader::$lastTime)/1000;
+
+		Downloader::$lastDownloaded = $downloaded;
+		Downloader::$lastTime = microtime(true);
+
+
+		$downloaded = $downloaded/1000000;
+		$downloadSize = $downloadSize/1000000;
+		
+		if ($speed < 1000) {
+			$speedStr = ", 下载速度：%.2f kb/s     ";
+		}else{
+			$speedStr = ", 下载速度：%.2f mb/s     ";
+			$speed = $speed/1000;
+		}
+		$progress = $downloaded/$downloadSize*100;
+		printf("下载进度: %.1f%%, %.2f MB/%.2f MB".$speedStr."\r", $progress, $downloaded, $downloadSize, $speed);
 	}
 }

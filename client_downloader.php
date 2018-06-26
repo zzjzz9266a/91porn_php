@@ -1,6 +1,7 @@
 <?PHP
 
-$list = file_get_contents('http://zhangzhijie.win:8000');
+$baseURL = 'http://xxoo.com';
+$list = file_get_contents($baseURL);	//改成对应vps的域名或ip
 $list = json_decode($list);
 
 $lastDownloaded = 0;
@@ -19,7 +20,7 @@ foreach ($list as $fileName) {
 		continue;
 	}
 
-	$source = 'http://zhangzhijie.win:8000/videos/'.$fileName;
+	$source = $baseURL.'/videos/'.$fileName;
 	echo $fileName."\n";
  
 	$ch = curl_init();//初始化一个cURL会话
@@ -35,7 +36,7 @@ foreach ($list as $fileName) {
 	$file = fopen($filePath,"w+");
 	fputs($file,$data);//写入文件
 	fclose($file);
-
+	unset($data);
 
 	// $command = 'curl '.$source.' -o '.$filePath;
 	// echo $command;

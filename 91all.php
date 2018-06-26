@@ -5,7 +5,6 @@ use DiDom\Document;
 use DiDom\Query;
 
 
-
 function random_ip()
 {
 	$a = rand(0, 255);
@@ -20,7 +19,8 @@ function listPage($url)
 	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:http://91porn.com/index.php";
 	
 	$currentPage = 1;
-	$maxPage = 10;
+
+	$maxPage = 10;	//自行更改页数
 	
 	while ($currentPage <= $maxPage) {
 		$url = $url."&page=".$currentPage;
