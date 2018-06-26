@@ -26,5 +26,5 @@ $maxPage = 10;	//更改爬取页数
 1、服务端由index.php提供接口，只需要把vps上的http server的监听端口指到该目录下；  
 2、本地运行client_downloader.php即可下载，需要注意，此文件下的下载URL需要改成对应vps的地址。
 ````
-$list = file_get_contents('http://zhangzhijie.win:8000');	//改成对应vps的域名或ip
+$list = file_get_contents('http://ooxx.com');	//改成对应vps的域名或ip
 ````
