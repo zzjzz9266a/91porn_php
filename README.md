@@ -1,6 +1,13 @@
 <p align="center">
     <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://github.com/zzjzz9266a/91porn_php/blob/master/logo.jpg"></a>
 </p>
+
+<p align="center">
+    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/badge/platform-all-lightgrey.svg"></a>
+    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/apm/l/vim-mode.svg"></a>
+    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/badge/language-php>=%205.6-orange.svg"></a>
+    <a href="https://travis-ci.org/johnlui/Swift-MMP"><img src="https://img.shields.io/travis/johnlui/Swift-MMP.svg"></a>
+</p>
   
 ## 使用说明：
 
@@ -28,3 +35,16 @@ $maxPage = 10;	//更改爬取页数
 ````
 $list = file_get_contents('http://ooxx.com');	//改成对应vps的域名或ip
 ````
+
+## 环境要求
+
+* windows, linux
+* php >= 5.6
+
+## 参与开源
+
+欢迎提交 issue 和 PR，大门永远向所有人敞开。
+
+## 开源协议
+
+本项目遵循 MIT 协议开源，具体请查看根目录下的 LICENSE 文件。
