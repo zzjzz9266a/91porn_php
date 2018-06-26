@@ -3,13 +3,15 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/badge/platform-all-lightgrey.svg"></a>
-    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/apm/l/vim-mode.svg"></a>
-    <a href="https://github.com/johnlui/Swift-MMP"><img src="https://img.shields.io/badge/language-php>=%205.6-orange.svg"></a>
-    <a href="https://travis-ci.org/johnlui/Swift-MMP"><img src="https://img.shields.io/travis/johnlui/Swift-MMP.svg"></a>
+    <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://img.shields.io/badge/platform-all-lightgrey.svg"></a>
+    <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://img.shields.io/apm/l/vim-mode.svg"></a>
+    <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://img.shields.io/badge/language-php>=%205.6-orange.svg"></a>
 </p>
   
-## 使用说明：
+## 使用说明
+当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整php.ini中内存的限制，最好在256mb以上，否则有可能出现内存溢出。
+
+如果需要不占用内存的版本，请下载<a href="https://github.com/zzjzz9266a/91porn_php/releases/tag/v1.0.0">v1.0.0</a>
 
 ### 基本使用
 91porn.php是爬取首页的视频，直接运行即可
@@ -28,12 +30,12 @@ $maxPage = 10;	//更改爬取页数
 下载完成后就可以到videos目录下high啦，嘿嘿嘿~~~
 
 ### 配合vps使用
-有的地区91porn容易被墙，所以可以用境外的vps先下载（下载方式同上），然后再从vps下载到本地；
+有的地区91porn容易被墙，所以可以用境外的vps先下载（下载方式同上，而且境外vps下载速度极快），然后再从vps下载到本地；
 
 1、服务端由index.php提供接口，只需要把vps上的http server的监听端口指到该目录下；  
 2、本地运行client_downloader.php即可下载，需要注意，此文件下的下载URL需要改成对应vps的地址。
 ````
-$list = file_get_contents('http://ooxx.com');	//改成对应vps的域名或ip
+$baseURL = 'http://xxoo.com';	//改成对应vps的域名或ip
 ````
 
 ## 环境要求
