@@ -14,7 +14,7 @@ function random_ip()
 	return $a.'.'.$b.'.'.$c.'.'.$d;
 }
 
-function listPage($url)
+function listPage($baseUrl)
 {
 	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:http://91porn.com/index.php";
 	
@@ -23,7 +23,7 @@ function listPage($url)
 	$maxPage = 10;	//自行更改页数
 	
 	while ($currentPage <= $maxPage) {
-		$url = $url."&page=".$currentPage;
+		$url = $baseUrl."&page=".$currentPage;
 		echo "\n".$url."\n";
 		try {
 			$listPage = new Document($url, true, $header);
