@@ -7,6 +7,7 @@ class Downloader
 
 	public static function download($url, $fileName, $date)
 	{
+		ini_set('memory_limit','2048M');	//调整最大占用内存
 		$fileName = preg_replace('# #','',$fileName);
 		if (!is_dir('./videos')) {
 			mkdir('./videos');
@@ -25,6 +26,7 @@ class Downloader
 		$ch = curl_init();
 		// 从配置文件中获取根路径
 		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_TIMEOUT,300);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
 		// 开启进度条
@@ -36,10 +38,13 @@ class Downloader
 
 		$data = curl_exec($ch);
 		curl_close($ch);
+		
+		if ($data) {
+			$file = fopen($filePath,"w+");
+			fputs($file,$data);//写入文件
+			fclose($file);
+		}
 
-		$file = fopen($filePath,"w+");
-		fputs($file,$data);//写入文件
-		fclose($file);
 		unset($data);
 	}
 
