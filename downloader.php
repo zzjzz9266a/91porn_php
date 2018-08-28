@@ -2,6 +2,10 @@
 
 class Downloader
 {
+
+	static $defaultPath = './videos';	//默认储存路径
+	// static $defaultPath = '/Users/ooxx/Downloads/videos';
+
 	static $lastDownloaded = 0;
 	static $lastTime = null;
 
@@ -9,11 +13,11 @@ class Downloader
 	{
 		ini_set('memory_limit','2048M');	//调整最大占用内存
 		$fileName = preg_replace('# #','',$fileName);
-		if (!is_dir('./videos')) {
-			mkdir('./videos');
+		if (!is_dir(Downloader::$defaultPath)) {
+			mkdir(Downloader::$defaultPath);
 		}
 
-		$filePath = './videos/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
+		$filePath = Downloader::$defaultPath.'/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
 		if (file_exists($filePath)){
 			echo "\033[0;32m"."文件已存在"."\033[0m\n";
 			return;

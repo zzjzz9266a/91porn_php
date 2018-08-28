@@ -46,5 +46,5 @@ function listPage($baseUrl)
 }
 
 listPage("http://91porn.com/v.php?category=top&viewtype=basic");	//本月最热
-listPage("http://91porn.com/v.php?category=mf&viewtype=basic");		//收藏最多
-listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
+// listPage("http://91porn.com/v.php?category=mf&viewtype=basic");		//收藏最多
+// listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论

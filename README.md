@@ -29,6 +29,10 @@ listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
 ````
 $maxPage = 10;	//更改爬取页数
 ````
+可以在downloader.php中更改视频的默认存放路径：
+````
+static $defaultPath = './videos';	//默认储存路径
+````
 
 下载完成后就可以到videos目录下high啦，嘿嘿嘿~~~
 
