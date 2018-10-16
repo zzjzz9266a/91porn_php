@@ -1,17 +1,8 @@
 <?php 
-require 'vendor/autoload.php';
+
 require 'detailPage.php';
 use DiDom\Document;
 use DiDom\Query;
-
-function random_ip()
-{
-	$a = rand(0, 255);
-	$b = rand(0, 255);
-	$c = rand(0, 255);
-	$d = rand(0, 255);
-	return $a.'.'.$b.'.'.$c.'.'.$d;
-}
 
 function listPage()
 {

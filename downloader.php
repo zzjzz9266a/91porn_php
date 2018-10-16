@@ -1,4 +1,5 @@
 <?php 
+require 'vendor/autoload.php';
 
 class Downloader
 {
@@ -11,7 +12,7 @@ class Downloader
 
 	public static function download($url, $fileName, $date)
 	{
-		ini_set('memory_limit','2048M');	//调整最大占用内存
+		ini_set('memory_limit','512M');	//调整最大占用内存
 		$fileName = preg_replace('# #','',$fileName);
 		if (!is_dir(Downloader::$defaultPath)) {
 			mkdir(Downloader::$defaultPath);
@@ -95,4 +96,13 @@ class Downloader
 		$progress = $downloaded/$downloadSize*100;
 		printf("下载进度: %.1f%%, %.2f MB/%.2f MB".$speedStr."\r", $progress, $downloaded, $downloadSize, $speed);
 	}
+}
+
+function random_ip()
+{
+	$a = rand(0, 255);
+	$b = rand(0, 255);
+	$c = rand(0, 255);
+	$d = rand(0, 255);
+	return $a.'.'.$b.'.'.$c.'.'.$d;
 }
