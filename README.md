@@ -55,8 +55,3 @@ php detailPage.php http://91porn.com/view_video.php?viewkey=042a30e56c9cd20b075f
 
 * windows, linux
 * php >= 5.6
-
-## 打赏
-如果觉得好用，欢迎大家赏一杯茶钱😋😋~~
-
-<img src="https://github.com/zzjzz9266a/91porn_php/blob/master/award.png" width="200" hegiht="200" align=left/>
