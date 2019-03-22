@@ -7,9 +7,12 @@
     <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://img.shields.io/apm/l/vim-mode.svg"></a>
     <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://img.shields.io/badge/language-php>=%205.6-orange.svg"></a>
 </p>
+
   
 ## 使用说明
-当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出。  
+* 91porn修改了视频的下发机制，需要运行一段 [js代码](http://91porn.com/js/md5.js)才能解析出正确的视频地址，在这里选择调用nodejs来执行。
+
+* 当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出。  
 ````
 ini_set('memory_limit','2048M');	//调整最大占用内存
 ````
@@ -51,7 +54,17 @@ $baseURL = 'http://xxoo.com';	//改成对应vps的域名或ip
 php detailPage.php http://91porn.com/view_video.php?viewkey=042a30e56c9cd20b075f
 ````
 
+### Node.js 安装方法：
+#### Windows
+https://nodejs.org/en/download/
+#### MacOS
+`brew install node --with-npm`
+#### CentOS
+`yum install nodejs`
+#### Ubuntu
+`apt-get install nodejs`
 ## 环境要求
 
 * windows, linux
 * php >= 5.6
+* node.js
