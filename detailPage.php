@@ -18,7 +18,7 @@ function singlePage($page_url, $title)
 	$videoUrl = explode("' type='video/mp4", $videoUrl)[0];
 	
 	$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
-    echo $videoUrl;
+    echo $videoUrl."\n";
    	Downloader::download($videoUrl, $title, $date);
 }
 
