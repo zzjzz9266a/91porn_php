@@ -10,9 +10,12 @@
 
   
 ## 使用说明
-* 受[`91_porn_spider`](https://github.com/eqblog/91_porn_spider)的启发，移除了对nodejs的依赖
 
-* 目前分支换用aria2进行下载，需要先安装 [`aria2`](https://github.com/aria2/aria2)，配合 [`webUI`](https://github.com/mayswind/AriaNg) 体验更佳
+* 用aria2进行下载，速度与稳定性都大幅提升，需要安装 [`aria2`](https://github.com/aria2/aria2)，配合 [`webUI`](https://github.com/mayswind/AriaNg) 体验更佳
+
+* 建议配合 [`shadowsocks`](https://github.com/shadowsocks/shadowsocks/tree/master)，使用http代理，理论上可以跑满带宽
+
+* 另有docker镜像 [`91porn-crawler`](https://github.com/zzjzz9266a/91porn-docker)一键安装，无需配置任何环境
 
 ### 基本使用
 
@@ -37,6 +40,7 @@ $maxPage = 10;	//更改爬取页数
 php detailPage.php http://91porn.com/view_video.php?viewkey=042a30e56c9cd20b075f
 ````
 
-* windows, linux
+* windows, linux, macos
 * php >= 5.6
 * aria2
+* nodejs
