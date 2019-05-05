@@ -15,7 +15,7 @@
 
 * 建议配合 [`shadowsocks`](https://github.com/shadowsocks/shadowsocks/tree/master)，使用http代理，理论上可以跑满带宽
 
-* 另有docker镜像 [`91porn-crawler`](https://github.com/zzjzz9266a/91porn-docker)一键安装，无需配置任何环境
+* 另有docker镜像 [`91porn-crawler`](https://github.com/zzjzz9266a/91porn-docker)一键安装，无需配置任何环境，教程参照 [`Docker版简明使用指南`](https://github.com/zzjzz9266a/91porn_php/wiki/Docker%E7%89%88%E7%AE%80%E6%98%8E%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
 
 ### 基本使用
 
