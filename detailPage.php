@@ -15,28 +15,41 @@ function random_ip()
 
 function singlePage($page_url, $title)
 {
-	// $aria2 = new Aria2('http://127.0.0.1:6800/jsonrpc');
-	// $result = $aria2->getGlobalStat();
-	// if ($result['result']['numWaiting'] >= 10) {	//提交到aria2的任务数过多后容易下载失败，此处限定最多等待任务为10个
-	// 	echo "等待。。。\n";
-	// 	sleep(5);
-	// 	singlePage($page_url, $title);
-	// 	return;
-	// }
-
 	if (checkExist($title)) {
 		return;
 	}
 	
 
-	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:".$page_url."\r\nContent-Type: multipart/form-data; session_language=cn_CN";
-	$page = new Document($page_url, true, $header);
+	$html = getHtml($page_url);
+	$page = new Document($html);
+
 	$cipher = $page->first('#vid')->first('script')->text();
 	$videoUrl = decode($cipher);
     echo $videoUrl."\n";
    	
    	download($videoUrl, $title);
 
+}
+
+function getHtml($url) {
+	$header = array();
+	$header[] = "Accept-Language:zh-CN,zh;q=0.9";
+	$header[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36";
+	$header[] = "X-Forwarded-For:".random_ip();
+	$header[] = "Content-Type: multipart/form-data; session_language=cn_CN";
+	$header[] = "Referer:".$url;
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_TIMEOUT,300);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+	// curl_setopt($ch, CURLOPT_PROXY, 'http://127.0.0.1:1087');	//代理地址
+	// curl_setopt($ch, CURLOPT_PROXY, 'socks5://127.0.0.1:1086');	//代理地址
+
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
 }
 
 function decode($cipher)

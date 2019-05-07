@@ -5,7 +5,6 @@ use DiDom\Query;
 
 function listPage($baseUrl)
 {
-	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:http://91porn.com/index.php";
 	
 	$currentPage = 1;
 
@@ -15,7 +14,8 @@ function listPage($baseUrl)
 		$url = $baseUrl."&page=".$currentPage;
 		echo "\n".$url."\n";
 		try {
-			$listPage = new Document($url, true, $header);
+			$html = getHtml($url);
+			$listPage = new Document($html);
 
 			$list = $listPage->find('//*[@class="listchannel"]/a[1]', Query::TYPE_XPATH);
 			foreach ($list as $item) {
