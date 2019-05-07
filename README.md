@@ -41,6 +41,7 @@ $maxPage = 10;	//更改爬取页数
 php detailPage.php http://91porn.com/view_video.php?viewkey=042a30e56c9cd20b075f
 ````
 
+### 使用条件
 * windows, linux, macos
 * php >= 5.6
 * aria2
