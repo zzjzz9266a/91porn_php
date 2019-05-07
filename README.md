@@ -10,10 +10,11 @@
 
   
 ## 使用说明
+[使用教程](https://github.com/zzjzz9266a/91porn_php/wiki/Aria2%E7%89%88%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
 
 * 用aria2进行下载，速度与稳定性都大幅提升，需要安装 [`aria2`](https://github.com/aria2/aria2)，配合 [`webUI`](https://github.com/mayswind/AriaNg) 体验更佳
 
-* 建议配合 [`shadowsocks`](https://github.com/shadowsocks/shadowsocks/tree/master)，使用http代理，理论上可以跑满带宽
+* 建议配合代理使用，理论上可以跑满带宽
 
 * 另有docker镜像 [`91porn-crawler`](https://github.com/zzjzz9266a/91porn-docker)一键安装，无需配置任何环境，教程参照 [`Docker版简明使用指南`](https://github.com/zzjzz9266a/91porn_php/wiki/Docker%E7%89%88%E7%AE%80%E6%98%8E%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97)
 
