@@ -9,7 +9,7 @@ class Downloader
 
 	static $lastDownloaded = 0;
 	static $lastTime = null;
-	static $proxy = 'http://127.0.0.1:1087';
+	// static $proxy = 'http://127.0.0.1:1087';
 	// static $proxy = 'socks5://127.0.0.1:1086';
 
 	public static function download($url, $fileName, $date)

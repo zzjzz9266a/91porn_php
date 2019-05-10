@@ -10,9 +10,11 @@
 
   
 ## 使用说明
+
+* 新增使用代理入口：`downloader.php`第12行，请自行选择
+
 * 当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出
 
-* 新增使用代理入口：`downloader.php`第12行，可自行选择
 ````
 ini_set('memory_limit','2048M');	//调整最大占用内存
 ````
@@ -39,7 +41,7 @@ static $defaultPath = './videos';	//默认储存路径
 下载完成后就可以到videos目录下找到视频文件了
 
 ### 使用代理
-`downloader.php`第12行：
+在`downloader.php`中修改代理地址：
 ```
 // static $proxy = 'http://127.0.0.1:1087';
 // static $proxy = 'socks5://127.0.0.1:1086';
