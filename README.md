@@ -10,9 +10,9 @@
 
   
 ## 使用说明
-* 91porn修改了视频的下发机制，需要运行一段 [js代码](http://91porn.com/js/md5.js)才能解析出正确的视频地址，在这里选择调用nodejs来执行。
+* 当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出
 
-* 当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出。  
+* 新增使用代理入口：`downloader.php`第12行，可自行选择
 ````
 ini_set('memory_limit','2048M');	//调整最大占用内存
 ````
@@ -36,17 +36,15 @@ $maxPage = 10;	//更改爬取页数
 ````
 static $defaultPath = './videos';	//默认储存路径
 ````
+下载完成后就可以到videos目录下找到视频文件了
 
-下载完成后就可以到videos目录下找到视频文件啦
-
-### 配合vps使用
-有的地区91porn容易被墙，所以可以用境外的vps先下载（下载方式同上，而且境外vps下载速度极快），然后再从vps下载到本地；
-
-1、服务端由`index.php`提供接口，只需要把vps上的http server的监听端口指到该目录下；  
-2、本地运行`client_downloader.php`即可下载，需要注意，此文件下的下载URL需要改成对应vps的地址。
-````
-$baseURL = 'http://xxoo.com';	//改成对应vps的域名或ip
-````
+### 使用代理
+`downloader.php`第12行：
+```
+// static $proxy = 'http://127.0.0.1:1087';
+// static $proxy = 'socks5://127.0.0.1:1086';
+```
+可支持`http`代理或`socks5`代理，稳定性更高
 
 ### 下载单个视频文件
 运行`detailPage.php`文件，将视频网页的地址传入
@@ -54,17 +52,19 @@ $baseURL = 'http://xxoo.com';	//改成对应vps的域名或ip
 php detailPage.php http://91porn.com/view_video.php?viewkey=042a30e56c9cd20b075f
 ````
 
+## 环境要求
+* windows, linux, macos
+* nodejs
+* php >= 5.6
+
 ### Node.js 安装方法：
 #### Windows
 https://nodejs.org/en/download/
 #### MacOS
 `brew install node --with-npm`
+#### 群晖
+套件中心
 #### CentOS
 `yum install nodejs`
 #### Ubuntu
 `apt-get install nodejs`
-## 环境要求
-
-* windows, linux
-* php >= 5.6
-* node.js

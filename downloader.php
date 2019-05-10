@@ -9,6 +9,8 @@ class Downloader
 
 	static $lastDownloaded = 0;
 	static $lastTime = null;
+	static $proxy = 'http://127.0.0.1:1087';
+	// static $proxy = 'socks5://127.0.0.1:1086';
 
 	public static function download($url, $fileName, $date)
 	{
@@ -34,6 +36,9 @@ class Downloader
 		curl_setopt($ch, CURLOPT_TIMEOUT,300);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+		if (property_exists('Downloader', 'proxy')) {
+			curl_setopt($ch, CURLOPT_PROXY, Downloader::$proxy);
+		}
 		// 开启进度条
 		curl_setopt($ch, CURLOPT_NOPROGRESS, false);
 		// 进度条的触发函数
@@ -82,7 +87,6 @@ class Downloader
 
 		Downloader::$lastDownloaded = $downloaded;
 		Downloader::$lastTime = microtime(true);
-
 
 		$downloaded = $downloaded/1000000;
 		$downloadSize = $downloadSize/1000000;
