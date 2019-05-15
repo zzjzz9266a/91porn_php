@@ -4,7 +4,7 @@ require 'vendor/autoload.php';
 class Downloader
 {
 
-	static $defaultPath = './videos';	//默认储存路径
+	static $defaultPath = __DIR__.'/videos';	//默认储存路径
 	// static $defaultPath = '/Users/ooxx/Downloads/videos';
 
 	static $lastDownloaded = 0;
