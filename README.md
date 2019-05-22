@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://github.com/zzjzz9266a/91porn_php/blob/master/logo.jpg"></a>
+    <a href="https://github.com/zzjzz9266a/91porn_php"><img src="https://github.com/zzjzz9266a/91porn_php/blob/master/logo.jpg?v=2"></a>
 </p>
 
 <p align="center">
@@ -70,3 +70,6 @@ https://nodejs.org/en/download/
 `yum install nodejs`
 #### Ubuntu
 `apt-get install nodejs`
+
+## 联系方式
+![](https://zzjtemp.oss-cn-beijing.aliyuncs.com/%E5%A4%A7%E8%B4%A7%E5%8F%B8%E6%9C%BA%E8%BD%A6%E6%8A%80%E4%BA%A4%E6%B5%81%E7%BE%A4%E7%BE%A4%E4%BA%8C%E7%BB%B4%E7%A0%81.png?v=5&Expires=1558497674&OSSAccessKeyId=TMP.AgGPwASm1-bpl4bX7Za58nzk8RGLB4-5AdnKPDXrDa161ng0XZoyqZJHQ7qaMC4CFQCoFMt-Epqoob1XhXW4zZPk7gpI3AIVAKIqgSyl8uq_Tq4HDsU1oT_n56c_&Signature=koXzQIRfWBt1jANj845ezeLxQAQ%3D)
