@@ -10,43 +10,41 @@
 
   
 ## 使用说明
-
-* 新增使用代理入口：`downloader.php`第12行，请自行选择
-
-* 当前版本的下载机制是先下到内存里，再存到磁盘上，以防止下载中断导致文件不完整。所以请调整`downloader.php`中内存的限制，保守起见最好在`512mb`以上，否则有可能出现内存不够而退出
-
-````
-ini_set('memory_limit','2048M');	//调整最大占用内存
-````
-
-如果需要不占用内存的版本，请下载<a href="https://github.com/zzjzz9266a/91porn_php/releases/tag/v1.0.0">v1.0.0</a>
-
 ### 基本使用
-`91porn.php`是爬取首页的视频，直接运行即可
+所有的配置项都在 `Config.php` 文件里，根据需要自行更改：
 
-`91all.php`是爬取列表页的，例如“收藏最多”、“本月最热”等等，要别的列表的话可以去找对应的url
-```` php
-listPage("http://91porn.com/v.php?category=top&viewtype=basic");	//本月最热
-listPage("http://91porn.com/v.php?category=mf&viewtype=basic");		//收藏最多
-listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
-````
-爬取页数可以自行更改，默认到10页；
-````
-$maxPage = 10;	//更改爬取页数
-````
-可以在downloader.php中更改视频的默认存放路径：
-````
-static $defaultPath = './videos';	//默认储存路径
-````
-下载完成后就可以到videos目录下找到视频文件了
-
-### 使用代理
-在`downloader.php`中修改代理地址：
+* 91的网站地址，可自己找免翻墙地址
+``` php
+static $url = '91porn.com';
+// static $url = '627.workarea7.live';
+// static $url = 'e528.mbaudet.cl';
 ```
+
+* 视频存放路径，默认放在项目的`videos`文件夹下
+``` php
+static $path = __DIR__.'/videos';
+// static $path = '/Users/ooxx/Downloads/videos';
+```
+
+* 代理(极度推荐，非常必要)，可支持`http`代理或`socks5`代理
+``` php
 // static $proxy = 'http://127.0.0.1:1087';
 // static $proxy = 'socks5://127.0.0.1:1086';
 ```
-可支持`http`代理或`socks5`代理，稳定性更高
+
+* 运行91all.php需要下载的列表地址以及页码数(只需要提取 "?" 以后的内容)
+``` php
+static $all_lists = [
+  'category=top&viewtype=basic' => [1, 10],     //本月最热
+  'category=mf&viewtype=basic' => [1, 5],       //收藏最多
+  'category=md&viewtype=basic' => 4,            //收藏最多
+];
+```
+
+* 内存限制，越大越好
+``` php
+static $memory_limit = '512M';
+```
 
 ### 下载单个视频文件
 运行`detailPage.php`文件，将视频网页的地址传入
