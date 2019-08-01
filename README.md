@@ -13,7 +13,7 @@
 ### 基本使用
 所有的配置项都在 `Config.php` 文件里，根据需要自行更改：
 
-* 91的网站地址，可自己找免翻墙地址
+* 91的网站地址，**使用免翻墙地址可杜绝大多数报错情况** 
 ``` php
 static $url = '91porn.com';
 // static $url = '627.workarea7.live';
@@ -26,7 +26,7 @@ static $path = __DIR__.'/videos';
 // static $path = '/Users/ooxx/Downloads/videos';
 ```
 
-* 代理(极度推荐，非常必要)，可支持`http`代理或`socks5`代理
+* 代理（**推荐**），可支持`http`代理或`socks5`代理
 ``` php
 // static $proxy = 'http://127.0.0.1:1087';
 // static $proxy = 'socks5://127.0.0.1:1086';
