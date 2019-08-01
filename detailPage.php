@@ -37,7 +37,7 @@ function getHtml($url) {
 	curl_setopt($ch, CURLOPT_TIMEOUT,300);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-	if (property_exists('Config', 'proxy')) {
+	if (property_exists('Config', 'proxy') && (Config::$url=='91porn')) {
 		curl_setopt($ch, CURLOPT_PROXY, Config::$proxy);
 	}
 
