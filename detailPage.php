@@ -37,8 +37,8 @@ function getHtml($url) {
 	curl_setopt($ch, CURLOPT_TIMEOUT,300);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-	if (property_exists('Downloader', 'proxy')) {
-		curl_setopt($ch, CURLOPT_PROXY, Downloader::$proxy);
+	if (property_exists('Config', 'proxy')) {
+		curl_setopt($ch, CURLOPT_PROXY, Config::$proxy);
 	}
 
 	$data = curl_exec($ch);

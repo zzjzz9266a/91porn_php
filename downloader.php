@@ -1,26 +1,22 @@
 <?php 
 require 'vendor/autoload.php';
+require 'config.php';
 
 class Downloader
 {
 
-	static $defaultPath = __DIR__.'/videos';	//默认储存路径
-	// static $defaultPath = '/Users/ooxx/Downloads/videos';
-
 	static $lastDownloaded = 0;
 	static $lastTime = null;
-	// static $proxy = 'http://127.0.0.1:1087';
-	// static $proxy = 'socks5://127.0.0.1:1086';
 
 	public static function download($url, $fileName, $date)
 	{
 		ini_set('memory_limit','512M');	//调整最大占用内存
 		$fileName = preg_replace('# #','',$fileName);
-		if (!is_dir(Downloader::$defaultPath)) {
-			mkdir(Downloader::$defaultPath);
+		if (!is_dir(Config::$path)) {
+			mkdir(Config::$path);
 		}
 
-		$filePath = Downloader::$defaultPath.'/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
+		$filePath = Config::$path.'/'.date('Ymd',strtotime($date)).'_'.$fileName.'.mp4';
 		if (file_exists($filePath)){
 			echo "\033[0;32m"."文件已存在"."\033[0m\n";
 			return;
@@ -36,8 +32,8 @@ class Downloader
 		curl_setopt($ch, CURLOPT_TIMEOUT,300);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-		if (property_exists('Downloader', 'proxy')) {
-			curl_setopt($ch, CURLOPT_PROXY, Downloader::$proxy);
+		if (property_exists('Config', 'proxy')) {
+			curl_setopt($ch, CURLOPT_PROXY, Config::$proxy);
 		}
 		// 开启进度条
 		curl_setopt($ch, CURLOPT_NOPROGRESS, false);

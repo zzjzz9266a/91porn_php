@@ -3,13 +3,11 @@ require 'detailPage.php';
 use DiDom\Document;
 use DiDom\Query;
 
-function listPage($baseUrl)
+function listPage($baseUrl, $min, $max)
 {	
-	$currentPage = 1;
-
-	$maxPage = 10;	//自行更改页数
+	$currentPage = $min;
 	
-	while ($currentPage <= $maxPage) {
+	while ($currentPage <= $max) {
 		$url = $baseUrl."&page=".$currentPage;
 		echo "\n".$url."\n";
 		try {
@@ -30,9 +28,12 @@ function listPage($baseUrl)
 		
 		$currentPage += 1;
 	}
-	
 }
 
-listPage("http://91porn.com/v.php?category=top&viewtype=basic");	//本月最热
-// listPage("http://91porn.com/v.php?category=mf&viewtype=basic");		//收藏最多
-// listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
+foreach (Config::$all_lists as $page_url => $range) {
+	if (is_array($range)) {
+		listPage('http://'.Config::$url.'/v.php?'.$page_url, $range[0], $range[1]);
+	} else if (is_int($range)) {
+		listPage('http://'.Config::$url.'/v.php?'.$page_url, $range, $range);
+	}
+}
