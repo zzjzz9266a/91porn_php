@@ -3,19 +3,16 @@ require 'detailPage.php';
 use DiDom\Document;
 use DiDom\Query;
 
-function listPage($baseUrl)
-{
-	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:http://91porn.com/index.php";
+function listPage($baseUrl, $min, $max)
+{	
+	$currentPage = $min;
 	
-	$currentPage = 1;
-
-	$maxPage = 10;	//自行更改页数
-	
-	while ($currentPage <= $maxPage) {
+	while ($currentPage <= $max) {
 		$url = $baseUrl."&page=".$currentPage;
 		echo "\n".$url."\n";
 		try {
-			$listPage = new Document($url, true, $header);
+			$html = getHtml($url);
+			$listPage = new Document($html);
 
 			$list = $listPage->find('//*[@class="listchannel"]/a[1]', Query::TYPE_XPATH);
 			foreach ($list as $item) {
@@ -31,9 +28,12 @@ function listPage($baseUrl)
 		
 		$currentPage += 1;
 	}
-	
 }
 
-listPage("http://91porn.com/v.php?category=top&viewtype=basic");	//本月最热
-// listPage("http://91porn.com/v.php?category=mf&viewtype=basic");		//收藏最多
-// listPage("http://91porn.com/v.php?category=md&viewtype=basic");		//本月讨论
+foreach (Config::$all_lists as $page_url => $range) {
+	if (is_array($range)) {
+		listPage('http://'.Config::$url.'/v.php?'.$page_url, $range[0], $range[1]);
+	} else if (is_int($range)) {
+		listPage('http://'.Config::$url.'/v.php?'.$page_url, $range, $range);
+	}
+}

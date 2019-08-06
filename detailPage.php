@@ -1,6 +1,7 @@
 <?php 
 require 'vendor/autoload.php';
 require 'Aria2.php';
+require 'config.php';
 use DiDom\Document;
 use DiDom\Query;
 
@@ -28,15 +29,44 @@ function singlePage($page_url, $title)
 		return;
 	}
 	
+	$html = getHtml($page_url);
+	$page = new Document($html);
 
-	$header = "Accept-Language:zh-CN,zh;q=0.9\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36\r\nX-Forwarded-For:".random_ip()."\r\nreferer:".$page_url."\r\nContent-Type: multipart/form-data; session_language=cn_CN";
-	$page = new Document($page_url, true, $header);
-	$cipher = $page->first('#vid')->first('script')->text();
-	$videoUrl = decode($cipher);
-    echo $videoUrl."\n";
+	$shareLink = $page->first('#linkForm2 #fm-video_link');
+	if ($shareLink) {
+		$sharePage = new Document(getHtml($shareLink->text()));
+		$videoUrl = $sharePage->first('source')->getAttribute('src');
+	}else{
+		echo "没有分享链接\n";
+		$cipher = $page->first('#vid script')->text();
+		$videoUrl = decode($cipher);
+	}
+  echo $videoUrl."\n";
    	
-   	download($videoUrl, $title);
+ 	download($videoUrl, $title);
 
+}
+
+function getHtml($url) {
+	$header = array();
+	$header[] = "Accept-Language:zh-CN,zh;q=0.9";
+	$header[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko)Chrome/51.0.2704.106 Safari/537.36";
+	$header[] = "X-Forwarded-For:".random_ip();
+	$header[] = "Content-Type: multipart/form-data; session_language=cn_CN";
+	$header[] = "Referer:".$url;
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, $url);
+	curl_setopt($ch, CURLOPT_TIMEOUT,300);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+	if (property_exists('Config', 'proxy') && (Config::$url=='91porn.com')) {
+		curl_setopt($ch, CURLOPT_PROXY, Config::$proxy);
+	}
+
+	$data = curl_exec($ch);
+	curl_close($ch);
+	return $data;
 }
 
 function decode($cipher)
