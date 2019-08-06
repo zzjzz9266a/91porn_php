@@ -16,15 +16,6 @@ function random_ip()
 
 function singlePage($page_url, $title)
 {
-	// $aria2 = new Aria2('http://127.0.0.1:6800/jsonrpc');
-	// $result = $aria2->getGlobalStat();
-	// if ($result['result']['numWaiting'] >= 10) {	//提交到aria2的任务数过多后容易下载失败，此处限定最多等待任务为10个
-	// 	echo "等待。。。\n";
-	// 	sleep(5);
-	// 	singlePage($page_url, $title);
-	// 	return;
-	// }
-
 	if (checkExist($title)) {
 		return;
 	}

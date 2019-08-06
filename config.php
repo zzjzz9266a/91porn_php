@@ -3,8 +3,8 @@
 class Config
 {
   // 91地址，可自己找免翻墙地址
-  static $url = '91porn.com';
-  // static $url = '627.workarea7.live';
+  // static $url = '91porn.com';
+  static $url = '627.workarea7.live';
   // static $url = 'e528.mbaudet.cl';
 
   // 视频存放路径
