@@ -62,7 +62,7 @@ function getHtml($url) {
 
 function decode($cipher)
 {
-	$js = file_get_contents('http://91porn.com/js/md5.js');
+	$js = file_get_contents('http://'.Config::$url.'/js/md5.js');
 	$file = fopen('./md5.js',"w+");
 	fputs($file,$js.'console.log(strencode(process.argv[2], process.argv[3], process.argv[4]));');//写入文件
 	fclose($file);
