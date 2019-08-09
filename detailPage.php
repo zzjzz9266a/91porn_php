@@ -79,7 +79,7 @@ function download($videoUrl, $title) {
 	$aria2 = new Aria2('http://127.0.0.1:6800/jsonrpc');
    	$result = $aria2->addUri(
 		[$videoUrl],
-		['dir'=>__DIR__.'/videos', 'out'=>$title.'.mp4']
+		['dir'=>Config::$path, 'out'=>$title.'.mp4']
 	);
 	if ($result['result']) {
 		echo "\033[0;32m"."提交Aria2成功!"."\033[0m\n";
