@@ -6,7 +6,7 @@ use DiDom\Query;
 
 function listPage()
 {
-	$url = "http://91porn.com/index.php";
+	$url = "http://".Config::$url."/index.php";
 
 	$html = getHtml($url);
 	$listPage = new Document($html);
