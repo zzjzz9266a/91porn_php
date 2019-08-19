@@ -8,12 +8,25 @@ function singlePage($page_url, $title)
 	$html = getHtml($page_url);
 	$page = new Document($html);
 
-	$cipher = $page->first('#vid script')->text();	
-	$videoUrl = decode($cipher);
+	// 先直接取source
+	$videoUrl = $page->first('#vid source')->getAttribute('src');
+
+	// 如果source取不到就找分享链接
+	if (!$videoUrl) {
+		$shareLink = $page->first('#linkForm2 #fm-video_link');
+		$sharePage = new Document(getHtml($shareLink->text()));
+    $videoUrl = $sharePage->first('source')->getAttribute('src');
+	}
+
+	// 分享链接也没有的话再解密
+	if (!$videoUrl) {
+		$cipher = $page->first('#vid script')->text();	
+		$videoUrl = decode($cipher);
+	}
 	$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
 
   echo $videoUrl."\n";
- 	Downloader::download($videoUrl, $title, $date);
+ 	// Downloader::download($videoUrl, $title, $date);
 }
 
 function getHtml($url) {
@@ -23,8 +36,6 @@ function getHtml($url) {
 	$header[] = "Content-Type: multipart/form-data; session_language=cn_CN";
 	$header[] = "Referer:".$url;
 	$header[] = "Host:".Config::$url;
-	$header[] = "User-Agent: ".Config::$user_agent;
-	$header[] = "Cookie: ".urldecode(Config::$cookie);
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
