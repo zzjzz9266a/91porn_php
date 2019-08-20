@@ -26,7 +26,7 @@ function singlePage($page_url, $title)
 	$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
 
   echo $videoUrl."\n";
- 	// Downloader::download($videoUrl, $title, $date);
+ 	Downloader::download($videoUrl, $title, $date);
 }
 
 function getHtml($url) {
