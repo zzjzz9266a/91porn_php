@@ -9,7 +9,10 @@ function singlePage($page_url, $title)
 	$page = new Document($html);
 
 	// 先直接取source
-	$videoUrl = $page->first('#vid source')->getAttribute('src');
+	$source = $page->first('#vid source');
+	if ($source) {
+		$videoUrl = $source->getAttribute('src');
+	}
 
 	// 如果source取不到就找分享链接
 	if (!$videoUrl) {
