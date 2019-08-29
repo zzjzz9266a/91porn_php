@@ -47,6 +47,16 @@ static $all_lists = [
 static $memory_limit = '512M';
 ```
 
+### 下载视频
+下载首页视频：
+````
+php 91porn.php
+````
+下载列表页视频：
+````
+php 91all.php
+````
+
 ### 下载单个视频文件
 运行`detailPage.php`文件，将视频网页的地址传入
 ````
