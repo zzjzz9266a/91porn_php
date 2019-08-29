@@ -47,12 +47,12 @@ static $all_lists = [
 static $memory_limit = '512M';
 ```
 
-### 下载视频
-下载首页视频：
+### 批量下载视频
+首页：
 ````
 php 91porn.php
 ````
-下载列表页视频：
+列表页：
 ````
 php 91all.php
 ````
