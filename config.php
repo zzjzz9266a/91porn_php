@@ -12,7 +12,7 @@ class Config
   // static $path = '/Users/ooxx/Downloads/videos';
 
   // 代理
-  static $proxy = 'http://127.0.0.1:1087';
+  // static $proxy = 'http://127.0.0.1:1087';
   // static $proxy = 'socks5://127.0.0.1:1086';
 
   // 运行91all.php需要下载的列表地址以及页码数(只需要提取 "?" 以后的内容)
