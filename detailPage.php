@@ -8,28 +8,37 @@ function singlePage($page_url, $title)
 	$html = getHtml($page_url);
 	$page = new Document($html);
 
-	// 先直接取source
-	$source = $page->first('#vid source');
-	if ($source) {
-		$videoUrl = $source->getAttribute('src');
-	}
+	try {
+		$videoUrl = "";
+		// 先直接取source
+		$source = $page->first('#vid source');
+		if ($source) {
+			$videoUrl = $source->getAttribute('src');
+			echo "====直接解析====\n";
+		}
 
-	// 如果source取不到就找分享链接
-	if (!$videoUrl) {
-		$shareLink = $page->first('#linkForm2 #fm-video_link');
-		$sharePage = new Document(getHtml($shareLink->text()));
-    $videoUrl = $sharePage->first('source')->getAttribute('src');
-	}
+		// 分享链接也没有的话再解密
+		if (!$videoUrl) {
+			$cipher = $page->first('#vid script')->text();	
+			$videoUrl = decode($cipher);
+			echo "====js解密====\n";
+		}
 
-	// 分享链接也没有的话再解密
-	if (!$videoUrl) {
-		$cipher = $page->first('#vid script')->text();	
-		$videoUrl = decode($cipher);
-	}
-	$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
+		// 如果source取不到就找分享链接
+		if (!$videoUrl) {
+			$shareLink = $page->first('#linkForm2 #fm-video_link');
+			$sharePage = new Document(getHtml($shareLink->text()));
+	    $videoUrl = $sharePage->first('source')->getAttribute('src');
+	    echo "====分享链接====\n";
+		}
+		$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
 
-  echo $videoUrl."\n";
- 	Downloader::download($videoUrl, $title, $date);
+	  echo $videoUrl."\n";
+	 	Downloader::download($videoUrl, $title, $date);
+	}catch(Exception $e) {
+		echo "这个视频没找到，请排查是否需要挂载代理\n";
+	}
+	
 }
 
 function getHtml($url) {
@@ -51,7 +60,11 @@ function getHtml($url) {
 
 	$data = curl_exec($ch);
 	curl_close($ch);
-	return $data;
+	if ($data) {
+		return $data;
+	}else{
+		echo "页面未取回，请排查是否需要挂载代理\n";
+	}
 }
 
 function decode($cipher)
