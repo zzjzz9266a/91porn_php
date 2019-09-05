@@ -53,6 +53,10 @@ class Downloader
 			fclose($file);
 		}
 
+		// 使用rclone上传onedrive，其中“91porn:/91porn”对应网盘名称和路径
+		// $command = 'rclone move -P '.$filePath.' 91porn:/91porn';
+		// system($command);
+
 		unset($data);
 	}
 
