@@ -11,7 +11,9 @@ class Downloader
 	public static function download($url, $fileName, $date)
 	{
 		ini_set('memory_limit', Config::$memory_limit);	//调整最大占用内存
+		$code = ['"', '*', ':', '<', '>', '？', '/', '\\', '|'];
 		$fileName = preg_replace('# #','',$fileName);
+		$fileName = str_replace($code, '', $fileName);
 		if (!is_dir(Config::$path)) {
 			mkdir(Config::$path);
 		}
