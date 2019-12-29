@@ -19,7 +19,7 @@ function singlePage($page_url, $title)
 
 		// 分享链接也没有的话再解密
 		if (!$videoUrl) {
-			$cipher = $page->first('#vid script')->text();	
+			$cipher = $page->first('#player_one script')->text();	
 			$videoUrl = decode($cipher);
 			echo "====js解密====\n";
 		}
@@ -70,13 +70,14 @@ function getHtml($url) {
 function decode($cipher)
 {
 	$js = getHtml('http://'.Config::$url.'/js/md5.js');
+	$cipher = explode('document.write(', $cipher)[1];
+	$cipher = explode(');', $cipher)[0];
+	
 	$file = fopen('./md5.js',"w+");
-	fputs($file,$js.'console.log(strencode(process.argv[2], process.argv[3], process.argv[4]));');//写入文件
+	fputs($file,$js.'console.log('.$cipher.');');//写入文件
 	fclose($file);
-	$cipher = substr($cipher, 55);
-	$cipher = substr($cipher, 0, strlen($cipher)-19);
-	$cipher = str_replace('","', ' ', $cipher);
-	$tag = shell_exec('node ./md5.js '.$cipher);
+
+	$tag = shell_exec('node ./md5.js');
 	$videoUrl = explode("<source src='", $tag)[1];
 	$videoUrl = explode("' type='video/mp4", $videoUrl)[0];
 	return $videoUrl;
