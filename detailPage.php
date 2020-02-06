@@ -11,7 +11,7 @@ function singlePage($page_url, $title)
 	try {
 		$videoUrl = "";
 		// 先直接取source
-		$source = $page->first('#vid source');
+		$source = $page->first('#player_one source');
 		if ($source) {
 			$videoUrl = $source->getAttribute('src');
 			echo "====直接解析====\n";
