@@ -14,9 +14,9 @@ function listPage($baseUrl, $min, $max)
 			$html = getHtml($url);
 			$listPage = new Document($html);
 
-			$list = $listPage->find('//*[@class="listchannel"]/a[1]', Query::TYPE_XPATH);
+			$list = $listPage->find('.well a');
 			foreach ($list as $item) {
-				$title = $item->getAttribute('title');
+				$title = $item->first('.video-title')->text();
 				echo "\n".$title."\n";
 				$itemUrl = $item->getAttribute('href');
 				echo $itemUrl."\n";

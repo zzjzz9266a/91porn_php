@@ -11,7 +11,7 @@ function singlePage($page_url, $title)
 	try {
 		$videoUrl = "";
 		// 先直接取source
-		$source = $page->first('#player_one source');
+		$source = $page->first('#player_one_html5_api source');
 		if ($source) {
 			$videoUrl = $source->getAttribute('src');
 			echo "====直接解析====\n";
@@ -31,7 +31,7 @@ function singlePage($page_url, $title)
 	    $videoUrl = $sharePage->first('source')->getAttribute('src');
 	    echo "====分享链接====\n";
 		}
-		$date = $page->find('//*[@id="videodetails-content"]/span[2]', Query::TYPE_XPATH)[0]->text();
+		$date = $page->find('#videodetails-content')[1]->find('.title-yakov')[1]->text();
 
 	  echo $videoUrl."\n";
 	 	Downloader::download($videoUrl, $title, $date);

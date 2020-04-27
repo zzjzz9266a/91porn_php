@@ -10,10 +10,10 @@ function listPage()
 
 	$html = getHtml($url);
 	$listPage = new Document($html);
-	$list = $listPage->find('//*[@id="tab-featured"]/p/a[2]', Query::TYPE_XPATH);
+	$list = $listPage->find('.well a');
 	
 	foreach ($list as $page) {
-		$title = $page->text();
+		$title = $page->first('.video-title')->text();
 		echo "\n".$title."\n";
 		$pageUrl = $page->getAttribute('href');
 		echo $pageUrl."\n";
