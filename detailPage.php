@@ -11,7 +11,7 @@ function singlePage($page_url, $title)
 	try {
 		$videoUrl = "";
 		// 先直接取source
-		$source = $page->first('#player_one_html5_api source');
+		$source = $page->first('#player_one source');
 		if ($source) {
 			$videoUrl = $source->getAttribute('src');
 			echo "====直接解析====\n";
@@ -43,11 +43,14 @@ function singlePage($page_url, $title)
 
 function getHtml($url) {
 	$header = array();
-	$header[] = "Accept-Language:zh-CN,zh;q=0.9";
-	$header[] = "X-Forwarded-For:".random_ip();
-	$header[] = "Content-Type: multipart/form-data; session_language=cn_CN";
-	$header[] = "Referer:".$url;
-	$header[] = "Host:".Config::$url;
+	// $header[] = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+	// $header[] = "Accept-Encoding: gzip, deflate";
+	$header[] = "Accept-Language:zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7";
+	// $header[] = "X-Forwarded-For:".random_ip();
+	// $header[] = "Content-Type: multipart/form-data; session_language=cn_CN";
+	// $header[] = "Referer:".$url;
+	// $header[] = "Host:".Config::$url;
+	// $header[] = "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36";
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
